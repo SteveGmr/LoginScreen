@@ -1,20 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:loginapp/Colors.dart';
-import 'package:loginapp/Screens/SignInScreen.dart';
+import 'package:loginapp/Screens/LoginScreen.dart';
 import 'package:loginapp/Widgets/MyNewTextField.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+class SignInScreen extends StatefulWidget {
+  const SignInScreen({super.key});
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<SignInScreen> createState() => _SignInScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _SignInScreenState extends State<SignInScreen> {
   bool showtext = false;
   bool CheckCheck = false;
 
+  var namecontroler = TextEditingController();
   var emailcontroler = TextEditingController();
+  var numbercontroler = TextEditingController();
   var passwordcontroler = TextEditingController();
   @override
   Widget build(BuildContext context) {
@@ -28,7 +30,7 @@ class _LoginScreenState extends State<LoginScreen> {
               children: [
                 //title section
                 const Text(
-                  'Log In',
+                  'Sign In',
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 30,
@@ -36,7 +38,26 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
                 const SizedBox(height: 50),
-                //email textfield section-----------------
+                //Name textfield section-----------------
+                MyNewTextField(
+                  textfieldcontroller: namecontroler,
+                  HelperText: 'Name',
+                  HintText: 'Enter your Name',
+                  PrefixIcon: Icons.email,
+                  KeyBoardType: TextInputType.name,
+                  ShowText: false,
+                ),
+                const SizedBox(height: 20),
+                //num textfield section-----------------
+                MyNewTextField(
+                  textfieldcontroller: numbercontroler,
+                  HelperText: 'Number',
+                  HintText: 'Enter your Number',
+                  PrefixIcon: Icons.email,
+                  KeyBoardType: TextInputType.phone,
+                  ShowText: false,
+                ),
+                const SizedBox(height: 20),
                 MyNewTextField(
                   textfieldcontroller: emailcontroler,
                   HelperText: 'Email',
@@ -84,16 +105,6 @@ class _LoginScreenState extends State<LoginScreen> {
                       'Remember me',
                       style: TextStyle(color: Colors.white),
                     ),
-                    const Spacer(),
-                    GestureDetector(
-                      onTap: () {
-                        print('You forgot password');
-                      },
-                      child: const Text(
-                        'Forgot Password !',
-                        style: TextStyle(color: Colors.white),
-                      ),
-                    ),
                   ],
                 ),
                 const SizedBox(height: 20),
@@ -106,63 +117,26 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   child: MaterialButton(
                     child: Text(
-                      'Log In',
+                      'Sign Up',
                       style: TextStyle(color: MyTextFlieldBlue, fontSize: 16),
                     ),
                     onPressed: () {
+                      print(namecontroler.text);
+                      print(numbercontroler.text);
                       print(emailcontroler.text);
                       print(passwordcontroler.text);
-                      print('You Loged In successfully');
+                      print('You Signed In successfully');
                     },
                   ),
                 ),
-                const SizedBox(height: 20),
-                //OR section-----------------
-                const Text('- OR -',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 15,
-                    )),
-                const SizedBox(height: 20),
-                //'sign in with' text section -----------------
-                const Text(
-                  'Sign In with',
-                  style: TextStyle(color: Colors.white),
-                ),
-                const SizedBox(height: 20),
-                //google & facebook Icons Section--------------
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    GestureDetector(
-                      onTap: () {
-                        print('Sign in with google');
-                      },
-                      child: SizedBox(
-                        height: 50,
-                        width: 50,
-                        child: Image.asset('images/google.png'),
-                      ),
-                    ),
-                    GestureDetector(
-                      onTap: () {
-                        print('Sign in with facebook');
-                      },
-                      child: SizedBox(
-                        height: 50,
-                        width: 50,
-                        child: Image.asset('images/facebook.png'),
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 20),
+
+                const SizedBox(height: 30),
                 //don't have an account section ------------
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      'don\'t have an account?',
+                      'Allredy have an account?',
                       style: TextStyle(color: Colors.white),
                     ),
                     SizedBox(width: 5),
@@ -171,11 +145,11 @@ class _LoginScreenState extends State<LoginScreen> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => SignInScreen()));
-                        print('Go to Sign up page');
+                                builder: (context) => LoginScreen()));
+                        print('Go to Log In page');
                       },
                       child: Text(
-                        'Sign Up',
+                        'Log In',
                         style: TextStyle(
                             color: Colors.white, fontWeight: FontWeight.bold),
                       ),
